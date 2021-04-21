@@ -7,7 +7,7 @@ const diary = () => {
             justifyContent:'center', 
             alignItems: 'center', 
             height: '90vh'}}>
-            <h1>Diary name Changed</h1>
+            <h1>Diary</h1>
         </div>
     )
 }
