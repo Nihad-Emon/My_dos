@@ -1,0 +1,20 @@
+.signupdiv{
+    position: relative;
+    height: flex;
+    width: 500px;
+    left: 10%;
+    margin-top: 50px;
+    float: left;
+}
+
+.container{
+    background-color: gray;
+    position: relative;
+    /* top: 50px; */
+    height: flex;
+    width: 500px; 
+    margin-top: 50px;
+    margin-left: 40%;
+    float: left; 
+}
+
