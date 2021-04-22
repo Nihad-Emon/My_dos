@@ -33,6 +33,14 @@ app.post("/api/insert", (req, res) => {
   });
 });
 
+app.post("/addTask", (req, res) => {
+  const input = req.body.input;
+  const add_Query = "INSERT INTO tasks (tasks) VALUES (?)";
+  pool.query(add_Query, [input], (err) => {
+    console.log(err);
+  });
+});
+
 app.listen(3004, () => {
   console.log("Running on 3004");
 });
