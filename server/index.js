@@ -48,8 +48,14 @@ app.post("/addTask", (req, res) => {
   });
 });
 
-app.get("/deleteTask", (req, res) => {
-  res.send("you can delete task");
+app.delete("/deleteTask/:id", (req, res) => {
+  console.log(req.params.id);
+  const id = req.params.id;
+  console.log(id);
+  const delete_Query = "delete from tasks where (id = (?))";
+  pool.query(delete_Query, [id], (err) => {
+    res.send("task has been deleted");
+  });
 });
 
 app.get("/updateTask", (req, res) => {

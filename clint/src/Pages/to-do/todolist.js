@@ -10,7 +10,6 @@ function TodoLists() {
   const addTodo = (todo) => {
     axios.get("http://localhost:3004/tasks").then((response) => {
       setTodos(response.data);
-      console.log(response.data);
     });
   };
 
@@ -25,9 +24,8 @@ function TodoLists() {
   };
 
   const removeTodo = (id) => {
-    const removedArr = [...todos].filter((todo) => todo.id !== id);
-
-    setTodos(removedArr);
+    axios.delete("http://localhost:3004/deleteTask/" + id);
+    addTodo();
   };
 
   const completeTodo = (id) => {
