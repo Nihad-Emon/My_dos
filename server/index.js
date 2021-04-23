@@ -33,12 +33,27 @@ app.post("/api/insert", (req, res) => {
   });
 });
 
+app.get("/tasks", (req, res) => {
+  const tasks_Query = "select * from tasks";
+  pool.query(tasks_Query, (err, response) => {
+    res.send(response);
+  });
+});
+
 app.post("/addTask", (req, res) => {
   const input = req.body.input;
   const add_Query = "INSERT INTO tasks (tasks) VALUES (?)";
   pool.query(add_Query, [input], (err) => {
     console.log(err);
   });
+});
+
+app.get("/deleteTask", (req, res) => {
+  res.send("you can delete task");
+});
+
+app.get("/updateTask", (req, res) => {
+  res.send("you can update task");
 });
 
 app.listen(3004, () => {
