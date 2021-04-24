@@ -7,11 +7,15 @@ const Todolist = (props) => {
   const [task, setTask] = useState("");
   const [tasklist, setTatskList] = useState([]);
 
+  const inputRef = useRef(null);
+
   const handleChange = (e) => {
     setTask(e.target.value);
   };
+
   useEffect(() => {
     getTaskList();
+    inputRef.current.focus();
   });
 
   const getTaskList = () => {
@@ -20,7 +24,8 @@ const Todolist = (props) => {
     });
   };
 
-  const onSubmitClick = () => {
+  const onSubmitClick = (e) => {
+    e.preventDefault();
     axios.post("http://localhost:3004/addTask", { input: task });
     getTaskList();
     setTask("");
@@ -33,13 +38,20 @@ const Todolist = (props) => {
 
   return (
     <div>
-      <h3>tasklist</h3>
-      <div className="ui input">
-        <input value={task} onChange={handleChange} placeholder="your task" />
+      <div className="in-sub-field">
+        <h3>Whats your plan for today</h3>
+        <div className="ui input">
+          <input
+            value={task}
+            onChange={handleChange}
+            placeholder="your task"
+            ref={inputRef}
+          />
+        </div>
+        <button className="ui primary button basic" onClick={onSubmitClick}>
+          Submit
+        </button>
       </div>
-      <button className="ui primary button basic" onClick={onSubmitClick}>
-        Submit
-      </button>
       <hr />
       <div className="ui cards">
         {tasklist.map((task) => (

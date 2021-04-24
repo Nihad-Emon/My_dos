@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color:#DCDCDC;
+  background-color: #dcdcdc;
 }
 .todo-app {
   display: flex;
@@ -23,10 +23,8 @@ body {
   padding-bottom: 32px;
 }
 
-.todolistdiv{
-
+.todolistdiv {
   position: relative;
-    
 }
 
 .todolistdiv h1 {
@@ -153,4 +151,10 @@ body {
 
 .edit-icon {
   color: #fff;
+}
+
+.in-sub-field {
+  margin: auto;
+  width: 50%;
+  padding: 15px;
 }
