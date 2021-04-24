@@ -1,6 +1,6 @@
 import React from 'react'
 import './sign-up.css'
-import signin from "./sign-in"
+import signin from "./Sign-in"
 import imaegforsignup from '../Pics/logo.png'
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -32,7 +32,7 @@ const Signup = () => {
 
     const submitForm = (data) =>{
         alert("Successfully Signedup");
-        history.push("/sign-in");
+        history.push("/Sign-in");
     }
 
     
@@ -43,7 +43,7 @@ const Signup = () => {
     const [password, setpassword] = useState("")
 
     const submitreview = () => {
-        Axios.post('http://localhost:3004/api/insert', {
+        Axios.post("http://localhost:3004/insert", {
             username: username, 
             email: email,
             password: password
@@ -134,7 +134,7 @@ const Signup = () => {
             
 
                 <p class="form__text">
-                    <a class="form__link" href="./sign-in" id="linkSignin">Already have an account? Sign in</a>
+                    <a class="form__link" href="./Sign-in" id="linkSignin">Already have an account? Sign in</a>
                 </p>
             </form>
           
