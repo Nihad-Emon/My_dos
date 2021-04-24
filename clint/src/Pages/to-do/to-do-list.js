@@ -1,36 +1,69 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import { RiGenderlessFill } from "react-icons/ri";
 
 const Todolist = (props) => {
-  const [input, setInput] = useState("");
+  const [task, setTask] = useState("");
+  const [tasklist, setTatskList] = useState([]);
 
   const handleChange = (e) => {
-    setInput(e.target.value);
+    setTask(e.target.value);
+  };
+  useEffect(() => {
+    getTaskList();
+  });
+
+  const getTaskList = () => {
+    axios.get("http://localhost:3004/tasks").then((response) => {
+      setTatskList(response.data);
+    });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const onSubmitClick = () => {
+    axios.post("http://localhost:3004/addTask", { input: task });
+    getTaskList();
+    setTask("");
+  };
 
-    //props.onSubmit({
-    //id: Math.floor(Math.random() * 10000),
-    //text: input,
-    //});
-
-    setInput("");
+  const onDeleteClick = (id) => {
+    axios.delete("http://localhost:3004/deleteTask/" + id);
+    getTaskList();
   };
 
   return (
-    <form className="todo-form" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="add to do"
-        value={input}
-        name="text"
-        className="todo-input"
-        onChange={handleChange}
-      />
-      <button className="todo-button">Add todo</button>
-    </form>
+    <div>
+      <h3>tasklist</h3>
+      <div className="ui input">
+        <input value={task} onChange={handleChange} placeholder="your task" />
+      </div>
+      <button className="ui primary button basic" onClick={onSubmitClick}>
+        Submit
+      </button>
+      <hr />
+      <div className="ui cards">
+        {tasklist.map((task) => (
+          <div className="card">
+            <div className="content">
+              <div className="meta">{task.tasks}</div>
+              <div className="extra content">
+                <div className="ui two buttons">
+                  <button className="ui basic green button">Edit</button>
+                  <button
+                    className="ui basic red button"
+                    onClick={() => {
+                      onDeleteClick(task.id);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

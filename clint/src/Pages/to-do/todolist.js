@@ -2,22 +2,19 @@ import React, { useState } from "react";
 import Todoform from "./todoform";
 import Todo from "./todo";
 import "./todolist.css";
+import axios from "axios";
 
 function TodoLists() {
   const [todos, setTodos] = useState([]);
 
   const addTodo = (todo) => {
-    if (!todo.text || /^\s*$/.test(todo.text)) {
-      return;
-    }
-
-    const newTodos = [todo, ...todos];
-
-    setTodos(newTodos);
+    axios.get("http://localhost:3004/tasks").then((response) => {
+      setTodos(response.data);
+    });
   };
 
   const updateTodo = (todoId, newValue) => {
-    if (!newValue.text || /^\s*$/.test(newValue.text)) {
+    if (!newValue.tasks || /^\s*$/.test(newValue.tasks)) {
       return;
     }
 
@@ -27,9 +24,8 @@ function TodoLists() {
   };
 
   const removeTodo = (id) => {
-    const removedArr = [...todos].filter((todo) => todo.id !== id);
-
-    setTodos(removedArr);
+    axios.delete("http://localhost:3004/deleteTask/" + id);
+    addTodo();
   };
 
   const completeTodo = (id) => {
@@ -43,8 +39,8 @@ function TodoLists() {
   };
 
   return (
-    <div className='todolistdiv'>
-      <h1 className='title'>What's the plan for today ?</h1>
+    <div className="todolistdiv">
+      <h1 className="title">What's the plan for today ?</h1>
       <Todoform onSubmit={addTodo} />
       <Todo
         todos={todos}

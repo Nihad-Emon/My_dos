@@ -48,7 +48,7 @@ const Signin = () => {
             else{
                 setcurrentuser(response.data[0].usernamel);
                 alert("Logeg-in");
-                history.push("/to-do/todolist")
+                history.push("/to-do/to-do-list")
             }
         });
         

@@ -35,10 +35,10 @@ app.post("/insert", (req, res) => {
     const password = req.body.password;
 
 
-                const sqlInsert = "INSERT INTO signupdata (uname, email, password) VALUES (?,?,?)";
-                pool.query(sqlInsert, [uname, email, password], (err, result) => {
-                    console.log(err);
-                });
+    const sqlInsert = "INSERT INTO signupdata (uname, email, password) VALUES (?,?,?)";
+    pool.query(sqlInsert, [uname, email, password], (err, result) => {
+    console.log(err);
+    });
             
 
 

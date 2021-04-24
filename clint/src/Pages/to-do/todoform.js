@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 import "./todolist.css";
@@ -18,10 +19,13 @@ function Todoform(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    props.onSubmit({
-      id: Math.floor(Math.random() * 10000),
-      text: input,
-    });
+    // props.onSubmit({
+    //   id: Math.floor(Math.random() * 10000),
+    //   text: input,
+    // });
+    props.onSubmit(
+      axios.post("http://localhost:3004/addTask", { input: input })
+    );
 
     setInput("");
   };
