@@ -2,7 +2,7 @@ import "./App.css";
 import Navbar from "./Components/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./Pages";
-import todolist from "./Pages/to-do/to-do-list";
+import Todolist from "./Pages/to-do/to-do-list";
 import calender from "./Pages/calender";
 import diary from "./Pages/diary";
 import medicinealert from "./Pages/medicine-alert";
@@ -20,7 +20,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/to-do/todolist" component={TodoList} />
+        <Route path="/to-do/to-do-list" component={Todolist} />
         <Route path="/calender" component={calender} />
         <Route path="/diary" component={diary} />
         <Route path="/medicine-alert" component={medicinealert} />

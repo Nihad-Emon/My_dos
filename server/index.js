@@ -49,17 +49,24 @@ app.post("/addTask", (req, res) => {
 });
 
 app.delete("/deleteTask/:id", (req, res) => {
-  console.log(req.params.id);
   const id = req.params.id;
-  console.log(id);
   const delete_Query = "delete from tasks where (id = (?))";
   pool.query(delete_Query, [id], (err) => {
     res.send("task has been deleted");
   });
 });
 
-app.get("/updateTask", (req, res) => {
-  res.send("you can update task");
+app.put("/updateTask", (req, res) => {
+  const id = req.body.id;
+  const task = req.body.task;
+  update_Query = "UPDATE tasks SET tasks = ? where id = ? ";
+  pool.query(update_Query, [task, id], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
 });
 
 app.listen(3004, () => {

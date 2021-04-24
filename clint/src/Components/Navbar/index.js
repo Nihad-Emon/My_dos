@@ -21,7 +21,7 @@ const Navbar = () => {
         <Bars />
 
         <NavMenu>
-          <NavLink to="/to-do/todolist" activeStyle>
+          <NavLink to="/to-do/to-do-list" activeStyle>
             To Do List
           </NavLink>
 
