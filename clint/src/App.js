@@ -10,7 +10,7 @@ import prayeralert from "./Pages/prayer-alert";
 import classalert from "./Pages/class-alert";
 import meetingalert from "./Pages/meeting-alert";
 import Signup from "./Pages/sign-up";
-import signin from "./Pages/sign-in";
+import Signin from "./Pages/Sign-in";
 import Todoform from "./Pages/to-do/todoform";
 import TodoList from "./Pages/to-do/todolist";
 
@@ -28,7 +28,7 @@ function App() {
         <Route path="/class-alert" component={classalert} />
         <Route path="/meeting-alert" component={meetingalert} />
         <Route path="/sign-up" component={Signup} />
-        <Route path="/sign-in" component={signin} />
+        <Route path="/sign-in" component={Signin} />
       </Switch>
     </Router>
   );
