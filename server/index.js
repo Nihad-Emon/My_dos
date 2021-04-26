@@ -50,17 +50,19 @@ app.post("/login", (req, res) => {
   });
 });
 
-app.get("/tasks", (req, res) => {
-  const tasks_Query = "select * from tasks";
-  pool.query(tasks_Query, (err, response) => {
+app.post("/tasks", (req, res) => {
+  const uname = req.body.uname;
+  const tasks_Query = "select * from tasks WHERE uname = ?";
+  pool.query(tasks_Query, [uname], (err, response) => {
     res.send(response);
   });
 });
 
 app.post("/addTask", (req, res) => {
   const input = req.body.input;
-  const add_Query = "INSERT INTO tasks (tasks) VALUES (?)";
-  pool.query(add_Query, [input], (err) => {
+  const uname = req.body.uname;
+  const add_Query = "INSERT INTO tasks (tasks,uname) VALUES (?,?)";
+  pool.query(add_Query, [input, uname], (err) => {
     console.log(err);
   });
 });

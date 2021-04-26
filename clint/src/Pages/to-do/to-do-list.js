@@ -1,11 +1,14 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import axios from "axios";
 import { RiGenderlessFill } from "react-icons/ri";
+import { userContext } from "../../UserContex";
 
 const Todolist = (props) => {
   const [task, setTask] = useState("");
   const [tasklist, setTatskList] = useState([]);
+
+  const [user, setUser] = useContext(userContext);
 
   const inputRef = useRef(null);
 
@@ -19,16 +22,19 @@ const Todolist = (props) => {
   });
 
   const getTaskList = () => {
-    axios.get("http://localhost:3004/tasks").then((response) => {
-      setTatskList(response.data);
-    });
+    axios
+      .post("http://localhost:3004/tasks", { uname: user })
+      .then((response) => {
+        setTatskList(response.data);
+      });
   };
 
   const onSubmitClick = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3004/addTask", { input: task });
+    axios.post("http://localhost:3004/addTask", { input: task, uname: user });
     getTaskList();
     setTask("");
+    console.log(user);
   };
 
   const onDeleteClick = (id) => {

@@ -1,12 +1,12 @@
 import React from "react";
 import "./sign-in.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
-
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { userContext } from "../UserContex";
 
 const types = yup.object().shape({
   usernamelogin: yup.string().required("Enter an existing username"),
@@ -31,7 +31,7 @@ const Signin = () => {
 
   const [loginstatus, setloginstatus] = useState("");
   const [currentuser, setcurrentuser] = useState("");
-
+  const [user, setUser] = useContext(userContext);
   const login = () => {
     Axios.post("http://localhost:3004/login", {
       usernamel: usernamelogin,
@@ -40,8 +40,8 @@ const Signin = () => {
       if (response.data.message) {
         setloginstatus(response.data.message);
       } else {
-        setcurrentuser(response.data[0].usernamel);
-        alert("Logeg-in");
+        setcurrentuser(response.data[0].uname);
+        setUser(response.data[0].uname);
         history.push("/to-do/to-do-list");
       }
     });
